@@ -18,6 +18,11 @@ public class Kenken {
         // TODO code application logic here
         //Prueba
         //Prueba del master
+        Figure figure=new Figure();
+        Coordinate[] coordinate=figure.ele();
+        for(int i=0;i<4;i++){
+            System.out.println("("+coordinate[i].x+","+coordinate[i].y+")");
+        }
     }
     
 }
