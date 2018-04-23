@@ -19,8 +19,8 @@ public class Kenken {
         //Prueba
         //Prueba del master
         Figure figure=new Figure();
-        Coordinate[] coordinate=figure.ele();
-        for(int i=0;i<4;i++){
+        Coordinate[] coordinate=figure.corto();
+        for(int i=0;i<figure.corto().length;i++){
             System.out.println("("+coordinate[i].x+","+coordinate[i].y+")");
         }
     }
