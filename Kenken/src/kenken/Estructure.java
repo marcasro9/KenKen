@@ -38,7 +38,9 @@ public class Estructure {
             System.out.println("Entrando a la posicion" + "(" + i + "," + j + ")");
             if (i < x) {
                 if (j < y) {
-                    int fig = num.nextInt(16);
+                    int max=16;
+                    int min=0;
+                    int fig = num.nextInt((max - min) + 1) + min;;
                     System.out.println("Figura" + fig);
                     if (matriz[i][j] == 0) {
                         if (fig == 0) {
@@ -283,7 +285,7 @@ public class Estructure {
                             }
                         }
                         if (fig == 12) {
-                            coordinate = figure.medioPos1();
+                            coordinate = figure.cuadrado();
                             if (verifyFigure(coordinate, i, j) == true) {
                                 System.out.println("Si se puede usar la figura");
                                 System.out.println("Entre a marcar las casillas");
@@ -303,7 +305,7 @@ public class Estructure {
                             }
                         }
                         if (fig == 13) {
-                            coordinate = figure.medioPos2();
+                            coordinate = figure.medioPos1();
                             if (verifyFigure(coordinate, i, j) == true) {
                                 System.out.println("Si se puede usar la figura");
                                 System.out.println("Entre a marcar las casillas");
@@ -323,7 +325,7 @@ public class Estructure {
                             }
                         }
                         if (fig == 14) {
-                            coordinate = figure.corto();
+                            coordinate = figure.medioPos2();
                             if (verifyFigure(coordinate, i, j) == true) {
                                 System.out.println("Si se puede usar la figura");
                                 System.out.println("Entre a marcar las casillas");
@@ -343,7 +345,7 @@ public class Estructure {
                             }
                         }
                         if (fig == 15) {
-                            coordinate = figure.cuadrado();
+                            coordinate = figure.corto();
                             if (verifyFigure(coordinate, i, j) == true) {
                                 System.out.println("Si se puede usar la figura");
                                 System.out.println("Entre a marcar las casillas");
@@ -362,7 +364,8 @@ public class Estructure {
                                 j++;
                             }
                         }
-                    }else{
+                    }
+                    else {
                         j++;
                     }
                 }
@@ -373,35 +376,117 @@ public class Estructure {
                 j = 0;
             }
         }
+//        i = 0;
+//        j = 0;
+//        while (i < x) {
+//            System.out.println("Entrando a la posicion" + "(" + i + "," + j + ")");
+//            if (i < x) {
+//                if (j < y) {
+//                    int fig = num.nextInt(3);
+//                    System.out.println("Figura" + fig);
+//                    if (fig == 0) {
+//                        coordinate = figure.medioPos1();
+//                        if (verifyFigure(coordinate, i, j) == true) {
+//                            System.out.println("Si se puede usar la figura");
+//                            System.out.println("Entre a marcar las casillas");
+//                            for (int pos = 0; pos < coordinate.length; pos++) {
+//                                int xPos = coordinate[pos].x + j;
+//                                //System.out.println("Pos x"+xPos);
+//                                int yPos = coordinate[pos].y + i;
+//                                //System.out.println("Pos y"+yPos);
+//                                if (xPos < x) {
+//                                    if (yPos < y) {
+//                                        matriz[yPos][xPos] = 14;
+//                                        totalM++;
+//                                        System.out.println("Casilla" + "(" + yPos + "," + xPos + ")" + " marcada");
+//                                    }
+//                                }
+//                            }
+//                            j++;
+//                        }
+//                    }
+//                    if (fig == 1) {
+//                        coordinate = figure.medioPos2();
+//                        if (verifyFigure(coordinate, i, j) == true) {
+//                            System.out.println("Si se puede usar la figura");
+//                            System.out.println("Entre a marcar las casillas");
+//                            for (int pos = 0; pos < coordinate.length; pos++) {
+//                                int xPos = coordinate[pos].x + j;
+//                                //System.out.println("Pos x"+xPos);
+//                                int yPos = coordinate[pos].y + i;
+//                                //System.out.println("Pos y"+yPos);
+//                                if (xPos < x) {
+//                                    if (yPos < y) {
+//                                        matriz[yPos][xPos] = 15;
+//                                        totalM++;
+//                                        System.out.println("Casilla" + "(" + yPos + "," + xPos + ")" + " marcada");
+//                                    }
+//                                }
+//                            }
+//                            j++;
+//                        }
+//                    }
+//                    if (fig == 2) {
+//                        coordinate = figure.corto();
+//                        if (verifyFigure(coordinate, i, j) == true) {
+//                            System.out.println("Si se puede usar la figura");
+//                            System.out.println("Entre a marcar las casillas");
+//                            for (int pos = 0; pos < coordinate.length; pos++) {
+//                                int xPos = coordinate[pos].x + j;
+//                                //System.out.println("Pos x"+xPos);
+//                                int yPos = coordinate[pos].y + i;
+//                                //System.out.println("Pos y"+yPos);
+//                                if (xPos < x) {
+//                                    if (yPos < y) {
+//                                        matriz[yPos][xPos] = 16;
+//                                        totalM++;
+//                                        System.out.println("Casilla" + "(" + yPos + "," + xPos + ")" + " marcada");
+//                                    }
+//                                }
+//                            }
+//                            j++;
+//                        }
+//                    }
+//                } else {
+//                    j++;
+//                }
+//            }
+//        }
+//        if (j == y) {
+//            System.out.println("Ya termino todas las columnas");
+//            i++;
+//            j = 0;
+//
+//        }
     }
 
     public boolean verifyFigure(Coordinate[] coordinate, int i, int j) {
 
-        boolean state = true;
-        int k = 0;
-        while (k < coordinate.length) {
-            int xPos = coordinate[k].x + j;
-            int yPos = coordinate[k].y + i;
-            if (xPos < x) {
-                if (yPos < y) {
-                    if (matriz[yPos][xPos] != 0) {
-                        state = false;
-                        System.out.println("Ya una casilla esta utilizada");
-                        return state;
-                    }
-                } else {
-                    System.out.println("Fuera de rango");
-                    state = false;
-                    return state;
-                }
-            } else {
-                System.out.println("Fuera de rango");
-                state = false;
-                return state;
-            }
-            k++;
-        }
-        System.out.println("En teoria salio true");
-        return state;
-    }
+         boolean state = true;
+         int k = 0;
+         while (k < coordinate.length) {
+             int xPos = coordinate[k].x + j;
+             int yPos = coordinate[k].y + i;
+             if (xPos < x) {
+                 if (yPos < y) {
+                     if (matriz[yPos][xPos] != 0) {
+                         state = false;
+                         System.out.println("Ya una casilla esta utilizada");
+                         return state;
+                     }
+                 } else {
+                     System.out.println("Fuera de rango");
+                     state = false;
+                     return state;
+                 }
+             } else {
+                 System.out.println("Fuera de rango");
+                 state = false;
+                 return state;
+             }
+             k++;
+         }
+         System.out.println("En teoria salio true");
+         return state;
+    } 
 }
