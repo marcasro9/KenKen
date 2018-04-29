@@ -21,16 +21,9 @@ public class Kenken {
         //Prueba
         //Prueba del master
         new Principal().setVisible(true);
-        Estructure prueba=new Estructure();
+        Structure prueba=new Structure();
         int x=5;
         int y=5;
         prueba.createEstructure(x,y);
-        for(int i=0;i<x;i++){
-            for(int j=0;j<y;j++){
-               System.out.print(prueba.matriz[i][j]+"      "); 
-            }
-            System.out.println();
-        }
-    }
-    
+    }  
 }
