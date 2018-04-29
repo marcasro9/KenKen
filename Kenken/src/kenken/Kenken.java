@@ -5,6 +5,8 @@
  */
 package kenken;
 
+import Interface.Principal;
+
 /**
  *
  * @author Armando
@@ -18,10 +20,14 @@ public class Kenken {
         // TODO code application logic here
         //Prueba
         //Prueba del master
-        Figure figure=new Figure();
-        Coordinate[] coordinate=figure.corto();
-        for(int i=0;i<figure.corto().length;i++){
-            System.out.println("("+coordinate[i].x+","+coordinate[i].y+")");
+        new Principal().setVisible(true);
+        Estructure prueba=new Estructure();
+        prueba.createEstructure(5,5);
+        for(int i=0;i<5;i++){
+            for(int j=0;j<5;j++){
+               System.out.print(prueba.matriz[i][j]+"      "); 
+            }
+            System.out.println();
         }
     }
     
