@@ -15,28 +15,18 @@ import java.util.List;
 public class Permutations {
     
     public static ArrayList<int[]> permute(int n, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
-        //Power case, pero de los casos 18 veces, por lo tanto es constante
-        if(figure==1){
-           for(a=0; a<=18;a++){
-               if(Math.pow(a,3)==n){
-                   int [] S={a};
-                   permutes.add(S); 
-               }
-            }
-        }
-        //caso donde se usan dos casillas, se incluye las operaciones elementales mas modulo.
-        else if(figure==2){
-               //int b=n;
+        ArrayList<int[]> permutes=new  ArrayList<>(); 
+        if(figure==2){
+               int a=0;
+               int b=n;
                for(a=0; a<=n;a++){
                    int [] S={a,n-a};
                    permutes.add(S);               
                }
         }
-        //figuras de 4, estas no incluyeen division ni modulo.
         else if(figure>2){
-               //int b=n;
+            int a=0;
+               int b=n;
                for(a=0; a<=n;a++){
                     for(int[] c: permute(n-a,figure-1)){
                         int [] S=new int[figure];
@@ -61,8 +51,8 @@ public class Permutations {
     }
     
     public static void main(String[] args) {
-        int n=5832;
-        int f=1;
+        int n=15;
+        int f=2;
         ArrayList<int[]> prueba=new ArrayList<>();
         prueba= permute(n,f);
         print(prueba);
