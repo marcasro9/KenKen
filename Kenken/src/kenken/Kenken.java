@@ -5,6 +5,7 @@
  */
 package kenken;
 
+import Interface.Menu;
 import Interface.Principal;
 
 /**
@@ -20,10 +21,9 @@ public class Kenken {
         // TODO code application logic here
         //Prueba
         //Prueba del master
-        new Principal().setVisible(true);
-        Structure prueba=new Structure();
-        int x=5;
-        int y=5;
-        prueba.createEstructure(x,y);
+       Menu menu=new Menu();
+       menu.setLocationRelativeTo(null);
+       menu.setResizable(false);
+       menu.setVisible(true);
     }  
 }
