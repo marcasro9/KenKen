@@ -333,7 +333,6 @@ public class Structure {
         }
         fillStructure(cont);
     }
-
     public void fillStructure(int fig2){
         Figure figure = new Figure();
         Coordinate[] coordinate;
