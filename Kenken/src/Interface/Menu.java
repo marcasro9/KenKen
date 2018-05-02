@@ -74,7 +74,7 @@ public class Menu extends javax.swing.JFrame {
         if(!rows.equals("") && !columns.equals("")){
             int x=Integer.parseInt(rows);
             int y=Integer.parseInt(columns);
-            if(x<=10 && y<=10){
+            if(x<=19 && y<=19){
                 if(x==y){
                     Principal principal=new Principal(x,y);
                     principal.setLocationRelativeTo(null);
