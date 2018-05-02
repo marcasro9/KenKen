@@ -14,37 +14,91 @@ import java.util.List;
  */
 public class Permutations {
     
-    public static ArrayList<int[]> permute(int n, int figure){
+    /*
+    Funcion para permutaciones de potencia.
+    */
+    public static ArrayList<int[]> powerPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
-        //Power case, pero de los casos 18 veces, por lo tanto es constante
         if(figure==1){
-           for(a=0; a<=18;a++){
-               if(Math.pow(a,3)==n){
+           for(a=0; a<=grid;a++){
+               if(Math.pow(a,3)==target){
                    int [] S={a};
                    permutes.add(S); 
                }
             }
         }
+        return permutes;
+    }
+    
+    /*
+    Funcion para permutaciones de modulo
+    */
+    public static ArrayList<int[]> moduloPermutations(int grid, int target, int figure){
+        ArrayList<int[]> permutes=new  ArrayList<>();
+        int a;
+        if(figure==2){
+            for(a=1;a<=grid;a++){
+                if(grid % a==target){
+                    int [] S={grid,a};
+                    int [] S2={a,grid};
+                    permutes.add(S);
+                    permutes.add(S2);
+                }
+            }
+        }
+        return permutes;
+    }
+    /*
+    funcion para sacar permutaciones de division, esta es de orden n^2
+    */
+    public static ArrayList<int[]> divisionPermutations(int grid, int target, int figure){
+        ArrayList<int[]> permutes=new  ArrayList<>();
+        int a;
+        int b;
+        if(figure==2){
+            for(a=grid;a>0;a--){
+                for(b=grid;b>0;b--)
+                    if(a / b==target){
+                        int [] S={a,b};
+                        int [] S2={b,a};
+                        permutes.add(S);
+                        permutes.add(S2);
+                }
+            }
+        }
+        return permutes;
+    }
+    
+    /*
+    Funcion para permutaciones de Suma
+    */
+    public static ArrayList<int[]> aditionPermutations(int grid, int target, int figure){
+        ArrayList<int[]> permutes=new  ArrayList<>();
+        int a;
+        int targetTemp;
         //caso donde se usan dos casillas, se incluye las operaciones elementales mas modulo.
-        else if(figure==2){
-            //int b=n;
-            for(a=0; a<=n;a++){
-                int [] S={a,n-a};
-                permutes.add(S);               
+        if(figure==2){
+            for(a=0; a<=target;a++){
+                targetTemp=target-a;
+                if(a<=grid && targetTemp<=grid){
+                    int [] S={a,(targetTemp)};
+                    permutes.add(S);
+                }
             }
         }
         else if(figure>2){
-            int b=n;
-            for(a=0; a<=n;a++){
-                for(int[] c: permute(n-a,figure-1)){
-                    int [] S=new int[figure];
-                    S[0]=a;
-                    for(int i=1;i<figure;i++){
-                        S[i] = c[i-1];
+            for(a=0; a<=target;a++){
+                for(int[] c: aditionPermutations(grid,target-a,figure-1)){
+                    if(a<=grid){
+                        int [] S=new int[figure];
+                        S[0]=a;
+                        for(int i=1;i<figure;i++){
+                            S[i] = c[i-1];
+                        }
+                        permutes.add(S);
                     }
-                    permutes.add(S);
-                }          
+                }
             }
         }
         return permutes;
@@ -60,10 +114,11 @@ public class Permutations {
     }
     
     public static void main(String[] args) {
-        int n=5832;
-        int f=1;
+        int grid=6;
+        int target=2;
+        int f=2;
         ArrayList<int[]> prueba=new ArrayList<>();
-        prueba= permute(n,f);
+        prueba= divisionPermutations(grid,target,f);
         print(prueba);
     }
 
