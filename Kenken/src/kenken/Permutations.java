@@ -15,15 +15,15 @@ import java.util.List;
 public class Permutations {
     
     /*
-    Funcion para permutaciones de potencia.
+    Funcion para permutaciones de potencia, orden de n.
     */
-    public static ArrayList<int[]> powerPermutations(int grid, int target, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
+    public static ArrayList<byte[]> powerPermutations(byte grid, byte target, byte figure){
+        ArrayList<byte[]> permutes=new  ArrayList<>();
+        byte a;
         if(figure==1){
            for(a=0; a<=grid;a++){
                if(Math.pow(a,3)==target){
-                   int [] S={a};
+                   byte [] S={a};
                    permutes.add(S); 
                }
             }
@@ -32,16 +32,16 @@ public class Permutations {
     }
     
     /*
-    Funcion para permutaciones de modulo
+    Funcion para permutaciones de modulo, orden de n
     */
-    public static ArrayList<int[]> moduloPermutations(int grid, int target, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
+    public static ArrayList<byte[]> moduloPermutations(byte grid, byte target, byte figure){
+        ArrayList<byte[]> permutes=new  ArrayList<>();
+        byte a;
         if(figure==2){
             for(a=1;a<=grid;a++){
                 if(grid % a==target){
-                    int [] S={grid,a};
-                    int [] S2={a,grid};
+                    byte [] S={grid,a};
+                    byte [] S2={a,grid};
                     permutes.add(S);
                     permutes.add(S2);
                 }
@@ -52,18 +52,18 @@ public class Permutations {
     /*
     funcion para sacar permutaciones de division, esta es de orden n^2
     */
-    public static ArrayList<int[]> divisionPermutations(int grid, int target, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
-        int b;
-        int c;
-        int d;
+    public static ArrayList<byte[]> divisionPermutations(byte grid, byte target, byte figure){
+        ArrayList<byte[]> permutes=new  ArrayList<>();
+        byte a;
+        byte b;
+        byte c;
+        byte d;
         if(figure==2){
             for(a=grid;a>0;a--){
                 for(b=grid;b>0;b--)
                     if(a / b==target){
-                        int [] S={a,b};
-                        int [] S2={b,a};
+                        byte [] S={a,b};
+                        byte [] S2={b,a};
                         permutes.add(S);
                         permutes.add(S2);
                 }
@@ -75,7 +75,7 @@ public class Permutations {
                     for(c=1;c<=grid;c++){
                         for(d=1;d<=grid;d++){
                             if((d/c/b/a)==target){
-                                int[] S={d,c,b,a};
+                                byte[] S={d,c,b,a};
                                 permutes.add(S);
                             }
                         }
@@ -91,17 +91,17 @@ public class Permutations {
     /*
     Funcion para multiplicacion si figura es de 2 entonces n^2 si figura es de 4 entonces n^4
     */
-    public static ArrayList<int[]> multiPermutations(int grid, int target, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
-        int b;
-        int c;
-        int d;
+    public static ArrayList<byte[]> multiPermutations(byte grid, byte target, byte figure){
+        ArrayList<byte[]> permutes=new  ArrayList<>();
+        byte a;
+        byte b;
+        byte c;
+        byte d;
         if (figure==2){
             for(a=1;a<=grid;a++){
                 for(b=1;b<=grid;b++)
                     if(a*b==target){
-                        int [] S={a,b};
+                        byte [] S={a,b};
                         permutes.add(S);
                 }
             }
@@ -112,7 +112,7 @@ public class Permutations {
                     for(c=1;c<=grid;c++){
                         for(d=1;d<=grid;d++){
                             if((a*b*c*d)==target){
-                                int[] S={a,b,c,d};
+                                byte[] S={a,b,c,d};
                                 permutes.add(S);
                             }
                         }
@@ -128,18 +128,18 @@ public class Permutations {
     /*
     Funcion para permutaciones de restas, si son cuadros de 2 es n^2 si son figuras de 4 es n^4.
     */
-    public static ArrayList<int[]> subtractionPermutations(int grid, int target, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
-        int b;
-        int c;
-        int d;
+    public static ArrayList<byte[]> subtractionPermutations(byte grid, byte target, byte figure){
+        ArrayList<byte[]> permutes=new  ArrayList<>();
+        byte a;
+        byte b;
+        byte c;
+        byte d;
         if(figure==2){
             for(a=0;a<=grid;a++){
                 for(b=0;b<=grid;b++)
                     if(b-a==target){
-                        int [] S={b,a};
-                        int [] S2={a,b};
+                        byte [] S={b,a};
+                        byte [] S2={a,b};
                         permutes.add(S);
                         permutes.add(S2);
                 }
@@ -151,7 +151,7 @@ public class Permutations {
                     for(c=0;c<=grid;c++){
                         for(d=0;d<=grid;d++){
                             if((d-c-b-a)==target){
-                                int[] S={d,c,b,a};
+                                byte[] S={d,c,b,a};
                                 permutes.add(S);
                             }
                         }
@@ -162,27 +162,30 @@ public class Permutations {
         return permutes;
     }
     /*
-    Funcion para permutaciones de Suma
+    Funcion para permutaciones de Suma, n si es de dos, n3 si es de 4.
     */
-    public static ArrayList<int[]> aditionPermutations(int grid, int target, int figure){
-        ArrayList<int[]> permutes=new  ArrayList<>();
-        int a;
-        int targetTemp;
+    public static ArrayList<byte[]> aditionPermutations(byte grid, byte target, byte figure){
+        ArrayList<byte[]> permutes=new  ArrayList<>();
+        byte a;
+        byte targetTemp;
+        byte figTemp;
         //caso donde se usan dos casillas, se incluye las operaciones elementales mas modulo.
         if(figure==2){
             for(a=0; a<=target;a++){
-                targetTemp=target-a;
+                targetTemp=(byte) (target-a);
                 if(a<=grid && targetTemp<=grid){
-                    int [] S={a,(targetTemp)};
+                    byte [] S={a,(targetTemp)};
                     permutes.add(S);
                 }
             }
         }
         else if(figure>2){
             for(a=0; a<=target;a++){
-                for(int[] c: aditionPermutations(grid,target-a,figure-1)){
+                targetTemp=(byte) (target-a);
+                figTemp=(byte) (figure-1);
+                for(byte[] c: aditionPermutations(grid,targetTemp,figTemp)){
                     if(a<=grid){
-                        int [] S=new int[figure];
+                        byte [] S=new byte[figure];
                         S[0]=a;
                         for(int i=1;i<figure;i++){
                             S[i] = c[i-1];
@@ -195,9 +198,9 @@ public class Permutations {
         return permutes;
     }
     
-    public static void print(ArrayList<int[]> list){
-        for(int[] i:list){
-            for(int x:i){
+    public static void print(ArrayList<byte[]> list){
+        for(byte[] i:list){
+            for(byte x:i){
                 System.out.println(x + " ");
             }
         System.out.println("");
@@ -205,11 +208,11 @@ public class Permutations {
     }
     
     public static void main(String[] args) {
-        int grid=18;
-        int target=2;
-        int f=4;
-        ArrayList<int[]> prueba=new ArrayList<>();
-        prueba= divisionPermutations(grid,target,f);
+        byte grid=12;
+        byte target=40;
+        byte f=4;
+        ArrayList<byte[]> prueba=new ArrayList<>();
+        prueba= multiPermutations(grid,target,f);
         print(prueba);
     }
 
