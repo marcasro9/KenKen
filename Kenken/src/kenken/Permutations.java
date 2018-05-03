@@ -71,6 +71,79 @@ public class Permutations {
     }
     
     /*
+    Funcion para multiplicacion si figura es de 2 entonces n^2 si figura es de 4 entonces n^4
+    */
+    public static ArrayList<int[]> multiPermutations(int grid, int target, int figure){
+        ArrayList<int[]> permutes=new  ArrayList<>();
+        int a;
+        int b;
+        int c;
+        int d;
+        if (figure==2){
+            for(a=1;a<=grid;a++){
+                for(b=1;b<=grid;b++)
+                    if(a*b==target){
+                        int [] S={a,b};
+                        permutes.add(S);
+                }
+            }
+        }
+        else if(figure>2){
+            for(a=1; a<=grid;a++){
+                for(b=1;b<=grid;b++){
+                    for(c=1;c<=grid;c++){
+                        for(d=1;d<=grid;d++){
+                            if((a*b*c*d)==target){
+                                int[] S={a,b,c,d};
+                                permutes.add(S);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        return permutes;
+    }
+    
+    /*
+    Funcion para permutaciones de restas, si son cuadros de 2 es n^2 si son figuras de 4 es n^4.
+    */
+    public static ArrayList<int[]> subtractionPermutations(int grid, int target, int figure){
+        ArrayList<int[]> permutes=new  ArrayList<>();
+        int a;
+        int b;
+        int c;
+        int d;
+        if(figure==2){
+            for(a=0;a<=grid;a++){
+                for(b=0;b<=grid;b++)
+                    if(b-a==target){
+                        int [] S={b,a};
+                        int [] S2={a,b};
+                        permutes.add(S);
+                        permutes.add(S2);
+                }
+            }
+        }
+        else if(figure>2){
+            for(a=0; a<=grid;a++){
+                for(b=0;b<=grid;b++){
+                    for(c=0;c<=grid;c++){
+                        for(d=0;d<=grid;d++){
+                            if((d-c-b-a)==target){
+                                int[] S={d,c,b,a};
+                                permutes.add(S);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return permutes;
+    }
+    /*
     Funcion para permutaciones de Suma
     */
     public static ArrayList<int[]> aditionPermutations(int grid, int target, int figure){
@@ -114,11 +187,11 @@ public class Permutations {
     }
     
     public static void main(String[] args) {
-        int grid=6;
-        int target=2;
-        int f=2;
+        int grid=18;
+        int target=200;
+        int f=4;
         ArrayList<int[]> prueba=new ArrayList<>();
-        prueba= divisionPermutations(grid,target,f);
+        prueba= multiPermutations(grid,target,f);
         print(prueba);
     }
 
