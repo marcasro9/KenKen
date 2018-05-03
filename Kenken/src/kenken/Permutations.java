@@ -56,6 +56,8 @@ public class Permutations {
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         int b;
+        int c;
+        int d;
         if(figure==2){
             for(a=grid;a>0;a--){
                 for(b=grid;b>0;b--)
@@ -67,6 +69,22 @@ public class Permutations {
                 }
             }
         }
+        else if (figure==4){
+            for(a=1; a<=grid;a++){
+                for(b=1;b<=grid;b++){
+                    for(c=1;c<=grid;c++){
+                        for(d=1;d<=grid;d++){
+                            if((d/c/b/a)==target){
+                                int[] S={d,c,b,a};
+                                permutes.add(S);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
         return permutes;
     }
     
@@ -188,10 +206,10 @@ public class Permutations {
     
     public static void main(String[] args) {
         int grid=18;
-        int target=200;
+        int target=2;
         int f=4;
         ArrayList<int[]> prueba=new ArrayList<>();
-        prueba= multiPermutations(grid,target,f);
+        prueba= divisionPermutations(grid,target,f);
         print(prueba);
     }
 
