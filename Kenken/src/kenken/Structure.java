@@ -937,7 +937,7 @@ public class Structure {
         System.out.println(); 
         Collections.sort(figures);
         for(int s=0;s<figures.size();s++){
-            System.out.println(figures.get(s).cuadritos); 
+            System.out.println(figures.get(s).cuadritos+"("+figures.get(s).posiciones.get(0).x+","+figures.get(s).posiciones.get(0).y+")"); 
         }
     }
     
