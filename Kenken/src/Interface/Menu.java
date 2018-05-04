@@ -76,10 +76,13 @@ public class Menu extends javax.swing.JFrame {
             int y=Integer.parseInt(columns);
             if(x<=18 && y<=18){
                 if(x==y){
+                    Structure prueba=new Structure();
+                    prueba.createEstructure(x,y);
                     Principal principal=new Principal(x,y);
                     principal.setLocationRelativeTo(null);
                     principal.setResizable(false);
                     principal.setVisible(true); 
+                    principal.setMatriz(x, y,prueba.returnMatriz(), prueba.returnFigures());
                 }else{
                     JOptionPane.showMessageDialog(this, "El kenken tiene que ser cuadrado (Ejemplo;5x5):");
                 }
