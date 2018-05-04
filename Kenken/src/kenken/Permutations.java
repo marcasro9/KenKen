@@ -17,7 +17,7 @@ public class Permutations {
     /*
     Funcion para permutaciones de potencia.
     */
-    public static ArrayList<int[]> powerPermutations(int grid, int target, int figure){
+    public  ArrayList<int[]> powerPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         if(figure==1){
@@ -34,7 +34,7 @@ public class Permutations {
     /*
     Funcion para permutaciones de modulo
     */
-    public static ArrayList<int[]> moduloPermutations(int grid, int target, int figure){
+    public  ArrayList<int[]> moduloPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         if(figure==2){
@@ -52,7 +52,7 @@ public class Permutations {
     /*
     funcion para sacar permutaciones de division, esta es de orden n^2
     */
-    public static ArrayList<int[]> divisionPermutations(int grid, int target, int figure){
+    public  ArrayList<int[]> divisionPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         int b;
@@ -91,7 +91,7 @@ public class Permutations {
     /*
     Funcion para multiplicacion si figura es de 2 entonces n^2 si figura es de 4 entonces n^4
     */
-    public static ArrayList<int[]> multiPermutations(int grid, int target, int figure){
+    public  ArrayList<int[]> multiPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         int b;
@@ -128,7 +128,7 @@ public class Permutations {
     /*
     Funcion para permutaciones de restas, si son cuadros de 2 es n^2 si son figuras de 4 es n^4.
     */
-    public static ArrayList<int[]> subtractionPermutations(int grid, int target, int figure){
+    public  ArrayList<int[]> subtractionPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         int b;
@@ -164,7 +164,7 @@ public class Permutations {
     /*
     Funcion para permutaciones de Suma
     */
-    public static ArrayList<int[]> aditionPermutations(int grid, int target, int figure){
+    public  ArrayList<int[]> aditionPermutations(int grid, int target, int figure){
         ArrayList<int[]> permutes=new  ArrayList<>();
         int a;
         int targetTemp;
@@ -195,7 +195,7 @@ public class Permutations {
         return permutes;
     }
     
-    public static void print(ArrayList<int[]> list){
+    public  void print(ArrayList<int[]> list){
         for(int[] i:list){
             for(int x:i){
                 System.out.println(x + " ");
@@ -204,14 +204,14 @@ public class Permutations {
         }
     }
     
-    public static void main(String[] args) {
-        int grid=18;
-        int target=2;
-        int f=4;
-        ArrayList<int[]> prueba=new ArrayList<>();
-        prueba= divisionPermutations(grid,target,f);
-        print(prueba);
-    }
+//    public  void main(String[] args) {
+//        int grid=18;
+//        int target=2;
+//        int f=4;
+//        ArrayList<int[]> prueba=new ArrayList<>();
+//        prueba= divisionPermutations(grid,target,f);
+//        print(prueba);
+//    }
 
 
 }

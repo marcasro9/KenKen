@@ -244,6 +244,11 @@ public final class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBComplete.setText("Complete");
+        jBComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCompleteActionPerformed(evt);
+            }
+        });
 
         jSave.setText("Save");
         jSave.addActionListener(new java.awt.event.ActionListener() {
@@ -306,7 +311,6 @@ public final class Principal extends javax.swing.JFrame {
 
     private void jSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveActionPerformed
         // TODO add your handling code here:
-    	
     }//GEN-LAST:event_jSaveActionPerformed
 
     private void jBLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoadActionPerformed
@@ -323,6 +327,11 @@ public final class Principal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jBLoadActionPerformed
+
+    private void jBCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompleteActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jBCompleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBComplete;
