@@ -38,7 +38,8 @@ public final class Principal extends javax.swing.JFrame {
     int fils;
     int cols;
     int matrizP[][];
-    List<Figure> figuresP;
+    public List<Figure> figuresP;
+    Structure prueba=new Structure();
     DefaultListModel modelo = new DefaultListModel();
 
     /**
@@ -49,14 +50,11 @@ public final class Principal extends javax.swing.JFrame {
     public Principal(int x,int y) {
         initComponents();
         setSize(x*50+117,y*50+80);
-        Structure prueba=new Structure();
-        prueba.createEstructure(x,y);
-        setMatriz(x,y,prueba.returnMatriz(),prueba.returnFigures());
     }
 
     public void setMatriz(int fils,int cols,int matriz[][],List<Figure> figures){
-        //panelKenKen.removeAll();
-        //panelOperations.removeAll();
+        panelKenKen.repaint();
+        panelOperations.removeAll();
         CUADRO = new JButton[fils][cols];
         OPE=new JButton[fils][cols];
         this.matrizP=matriz;
@@ -353,10 +351,14 @@ public final class Principal extends javax.swing.JFrame {
             }
             for(int i=0;i<fils;i++){
                 for(int j=0;j<cols;j++){
-                    matrizP[i][j]=Integer.parseInt(arregloDeCadena1[i+j]);
+                    this.matrizP[i][j]=Integer.parseInt(arregloDeCadena1[i+j]);
                 }
             }
-            setMatriz(fils,cols,matrizP,figuresP);
+            Principal principal=new Principal(fils,cols);
+            principal.setLocationRelativeTo(null);
+            principal.setResizable(false);
+            principal.setVisible(true);
+            principal.setMatriz(fils,cols,this.matrizP,figuresP);
             //for(int i=0;i<arregloDeCadena2.length;i++){
             //    figuresP.get(i).id=Integer.parseInt(arregloDeCadena2[i]);
             //}
@@ -378,7 +380,7 @@ public final class Principal extends javax.swing.JFrame {
 
     private void jBCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompleteActionPerformed
         // TODO add your handling code here:
-        
+        prueba.resolve();
     }//GEN-LAST:event_jBCompleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
