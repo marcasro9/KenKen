@@ -7,12 +7,15 @@ package Interface;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -35,11 +38,9 @@ public final class Principal extends javax.swing.JFrame {
     int fils;
     int cols;
     int matrizP[][];
+    List<Figure> figuresP;
     DefaultListModel modelo = new DefaultListModel();
-    JFileChooser seleccionar=new JFileChooser();
-    File archivo;
-    FileInputStream entrada;
-    FileOutputStream salida;
+
     /**
      * Creates new form KenKen
      * @param x
@@ -54,9 +55,12 @@ public final class Principal extends javax.swing.JFrame {
     }
 
     public void setMatriz(int fils,int cols,int matriz[][],List<Figure> figures){
+        //panelKenKen.removeAll();
+        //panelOperations.removeAll();
         CUADRO = new JButton[fils][cols];
         OPE=new JButton[fils][cols];
         this.matrizP=matriz;
+        this.figuresP=figures;
         this.fils=fils;
         this.cols=cols;
         int listColor[][]={
@@ -196,35 +200,6 @@ public final class Principal extends javax.swing.JFrame {
         }
         return estado;
     }
-    public String AbrirArchivo(File archivo){
-        String documento="";
-        try{
-            entrada=new FileInputStream(archivo);
-            int ascci;
-            while((ascci=entrada.read())!=-1){
-                char caracter=(char)ascci;
-                documento+=caracter;
-            }
-            
-        }catch(Exception e){
-            
-        }
-        return documento;
-    }
-    
-    public String GuardarArchivo(File archivo,String documento){
-        String mensaje=null;
-        try{
-            salida=new FileOutputStream(archivo);
-            byte[] bytxt=documento.getBytes();
-            salida.write(bytxt);
-            mensaje="Archivo guardado";
-        }catch(Exception e){
-            
-        }
-        return mensaje;
-        
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -306,21 +281,93 @@ public final class Principal extends javax.swing.JFrame {
 
     private void jSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveActionPerformed
         // TODO add your handling code here:
-    	
+    	//Un texto cualquiera guardado en una variable
+        String matriz="";
+        String figures="";
+        for(int i=0;i<figuresP.size();i++){
+            figures+="/"+String.valueOf(figuresP.get(i).id)+","+String.valueOf(figuresP.get(i).nombre)+","+String.valueOf(figuresP.get(i).operacion)+","+String.valueOf(figuresP.get(i).total)+","+String.valueOf(figuresP.get(i).cuadritos);
+            for(int j=0;j<figuresP.get(i).posiciones.size();j++){
+                figures+=",("+String.valueOf(figuresP.get(i).posiciones.get(j).x)+"."+String.valueOf(figuresP.get(i).posiciones.get(j).y+")");
+            }
+            figures+="\r\n";
+        }
+        for(int i=0;i<fils;i++){
+            for(int j=0;j<cols;j++){
+                matriz+=String.valueOf(matrizP[i][j])+",";
+            }
+        }
+        try
+        {
+        //Crear un objeto File se encarga de crear o abrir acceso a un archivo que se especifica en su constructor
+        File archivo=new File("C:\\Users\\Armando\\Documents\\PrimerSemestre2018\\Analisis\\matriz.txt");
+        File archivo2=new File("C:\\Users\\Armando\\Documents\\PrimerSemestre2018\\Analisis\\figures.txt");
+
+        //Crear objeto FileWriter que sera el que nos ayude a escribir sobre archivo
+        FileWriter escribir=new FileWriter(archivo,true);
+        FileWriter escribir2=new FileWriter(archivo2,true);
+
+        //Escribimos en el archivo con el metodo write 
+        escribir.write(matriz);
+        escribir2.write(figures);
+        //Cerramos la conexion
+        escribir.close();
+        escribir2.close();
+        }
+
+        //Si existe un problema al escribir cae aqui
+        catch(Exception e)
+        {
+        System.out.println("Error al escribir");
+        }
     }//GEN-LAST:event_jSaveActionPerformed
 
     private void jBLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoadActionPerformed
         // TODO add your handling code here:
-        if(seleccionar.showDialog(null,"Abrir")==JFileChooser.APPROVE_OPTION){
-            archivo=seleccionar.getSelectedFile();
-            if(archivo.getName().endsWith("txt")){
-                String documento=AbrirArchivo(archivo);
-                for(int i=0;i<documento.length();i++){
-                    System.out.println(documento.indexOf(i));
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Archivo no compatible");
+        String texto="";
+        try {
+            // Apertura del fichero y creacion de BufferedReader para poder
+            // hacer una lectura comoda (disponer del metodo readLine()).
+            BufferedReader bf1 = new BufferedReader(new FileReader("C:\\Users\\Armando\\Documents\\PrimerSemestre2018\\Analisis\\matriz.txt"));
+            BufferedReader bf2 = new BufferedReader(new FileReader("C:\\Users\\Armando\\Documents\\PrimerSemestre2018\\Analisis\\figures.txt"));
+            // Lectura del fichero
+            String linea1="";
+            String linea2="";
+            String bfRead1;
+            String bfRead2;
+            String[] arregloDeCadena1=null;
+            String[] arregloDeCadena2=null;
+            String[] arregloFigura=null;
+            while ((bfRead1 = bf1.readLine()) != null) {
+                linea1 =linea1 + bfRead1;
+                arregloDeCadena1 = linea1.split(",");
             }
+            while ((bfRead2 = bf2.readLine()) != null) {
+                linea2 =linea2 + bfRead2;
+                arregloDeCadena2 = linea2.split("/");
+                arregloFigura = linea2.split(",");
+            }
+            for(int i=0;i<fils;i++){
+                for(int j=0;j<cols;j++){
+                    matrizP[i][j]=Integer.parseInt(arregloDeCadena1[i+j]);
+                }
+            }
+            setMatriz(fils,cols,matrizP,figuresP);
+            //for(int i=0;i<arregloDeCadena2.length;i++){
+            //    figuresP.get(i).id=Integer.parseInt(arregloDeCadena2[i]);
+            //}
+//            for(int i=0;i<arregloDeCadena2.length;i++){
+//                String dato=arregloDeCadena2[i];
+//                for(int j=0;j<dato.length();j++){
+//                    figuresP.get(i).id=dato.charAt(0);
+//                    figuresP.get(i).id=dato.charAt(1);
+//                    System.out.println(dato.charAt(j));
+//                    System.out.println("-------------");
+//                }
+//            }
+            
+            
+        } catch (Exception e) {
+            System.err.println("No se pudo abrir");
         }
     }//GEN-LAST:event_jBLoadActionPerformed
 

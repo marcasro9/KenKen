@@ -19,7 +19,7 @@ public class Figure implements Comparable<Figure>{
     public Integer cuadritos;
     public int id;
     public String nombre;
-    ArrayList<Coordinate> posiciones=new  ArrayList<>();
+    public ArrayList<Coordinate> posiciones=new  ArrayList<>();
 
     public Figure(int operacion, int total, int cuadritos, int id, String nombre) {
         this.operacion = operacion;
