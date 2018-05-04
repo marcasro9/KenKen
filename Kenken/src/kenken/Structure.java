@@ -17,15 +17,17 @@ import java.util.Random;
 public class Structure {
 
     int matriz[][];
+    int resultado[][];
     List<Figure> figures=new  ArrayList<Figure>();
     int x;
     int y;
-
+    Permutations permutations=new Permutations();
     public void createEstructure(int x, int y) {
         this.x = x;
         this.y = y;
         int cont=1;
         this.matriz = new int[x][y];
+        this.resultado=new int [x][y];
         Random num = new Random();
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < x; j++) {
@@ -931,17 +933,65 @@ public class Structure {
         System.out.println(figura);
         System.out.println("Figuras sin ordenar");
         for(int s=0;s<figures.size();s++){
-            System.out.println(figures.get(s).cuadritos); 
+            System.out.println(figures.get(s).operacion); 
         }
         System.out.println("Figuras ordenadas"); 
         System.out.println(); 
         Collections.sort(figures);
         for(int s=0;s<figures.size();s++){
+            //System.out.println(figures.get(s).cuadritos);
+            switch(figures.get(s).operacion){
+                case 0:
+                    figures.get(s).posiblesRes=permutations.aditionPermutations(x, figures.get(s).total, figures.get(s).cuadritos);
+                    permutations.print(figures.get(s).posiblesRes);
+                    break;
+                case 1:
+                    figures.get(s).posiblesRes=permutations.subtractionPermutations(x, figures.get(s).total, figures.get(s).cuadritos);
+                    permutations.print(figures.get(s).posiblesRes);
+                    break;
+                case 2:
+                    figures.get(s).posiblesRes=permutations.multiPermutations(x, figures.get(s).total, figures.get(s).cuadritos);
+                    permutations.print(figures.get(s).posiblesRes);
+                    break;
+                case 3:
+                    figures.get(s).posiblesRes=permutations.divisionPermutations(x, figures.get(s).total, figures.get(s).cuadritos);
+                    permutations.print(figures.get(s).posiblesRes);
+                    break;
+                case 4:
+                    figures.get(s).posiblesRes=permutations.moduloPermutations(x, figures.get(s).total, figures.get(s).cuadritos);
+                    permutations.print(figures.get(s).posiblesRes);
+                    break;
+                case 5:
+                    figures.get(s).posiblesRes=permutations.powerPermutations(x, figures.get(s).total, figures.get(s).cuadritos);
+                    permutations.print(figures.get(s).posiblesRes);
+                    break;
+            }
+        }
+        
+      
+        initializeResultado();
+        
+        for ( i=0;i<this.x;i++){
+            for( j=0;j<this.y;j++){
+               System.out.println("("+i+j+")"+resultado[i][j]); 
+            }
+        }
+        
+        resultado=backtracking(0,figures,resultado);
+        System.out.println("Backtracking");
+        for ( i=0;i<this.x;i++){
+            for( j=0;j<this.y;j++){
+               System.out.println("("+i+j+")"+resultado[i][j]); 
+            }
+        }
+        for(int i1=0;i1<x;i1++){
+            for(int j1=0;j1<y;j1++){
+               System.out.print(resultado[i1][j1]+"\t"); 
+            }
+            System.out.println();
             System.out.println(figures.get(s).cuadritos+"("+figures.get(s).posiciones.get(0).x+","+figures.get(s).posiciones.get(0).y+")"); 
         }
     }
-    
-    
     
     public boolean verifyFigure(Coordinate[] coordinate, int i, int j) {
 
@@ -981,7 +1031,7 @@ public class Structure {
                 return result;
             }
             if(operacion==1){//resta
-                result=num.nextInt(x-(x-1));
+                result=num.nextInt(x);
                 return result;
             }
             if(operacion==2){//multiplicacion
@@ -1023,8 +1073,79 @@ public class Structure {
     }
     public int [][] returnMatriz(){
         return matriz;
-    } 
+    }
+    
+    public int[][] initializeResultado(){
+        for (int i=0;i<this.x;i++){
+            for(int j=0;j<this.y;j++){
+               this.resultado[i][j]=-1; 
+            }
+        }
+        return this.resultado;
+    }
+    
     public List<Figure> returnFigures(){
         return figures;
+    }
+    public int [][] returnResult(){
+        return resultado;
+    }
+    public int[][] backtracking(int posF,List<Figure> figures, int[][] resultado){
+        int cont=posF;
+        if(isFilled(resultado)==true){
+            System.out.println("correcta");
+            return resultado;
+        }else{
+            for(int i=posF;i<figures.size();i++){
+                for(int j=0;j<figures.get(i).posiblesRes.size();j++){
+                    for(int k=0;k<figures.get(i).posiblesRes.get(j).length;k++){
+                        int resul=figures.get(i).posiblesRes.get(j)[k];
+                        int x1=figures.get(i).posiciones.get(k).x;
+                        int y1=figures.get(i).posiciones.get(k).y;
+                        if(checkmatriz(resultado,resul,x1,y1)==false){
+                            resultado[x1][y1]=resul;
+                            cont++;
+                            System.out.println("Si entro");
+                            backtracking(cont,figures,resultado);
+                        }else{
+                            resultado[x1][y1]=-1;
+                            backtracking(cont,figures,resultado);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("No hay solucion");
+        return resultado;
+    }
+    
+    public boolean isFilled(int[][] resultado){
+        for(int i=0;i<x;i++){
+            for(int j=0;j<y;j++){
+                if(resultado[i][j]==-1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public boolean checkmatriz(int[][]resultado,int t,int x2,int y2){
+        boolean estado=false;
+        //fils
+        for(int i=x2;i<x;i++){
+            if(resultado[i][y2]==t){
+                estado=true;
+                return estado;
+            }
+        }
+        //col
+        for(int j=y2;j<y;j++){
+            if(resultado[x2][j]==t){
+                estado=true;
+                return estado;
+            }
+        }
+        return estado;
     }
 }

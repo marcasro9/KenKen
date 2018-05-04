@@ -19,6 +19,8 @@ public class Figure implements Comparable<Figure>{
     public Integer cuadritos;
     public int id;
     public String nombre;
+    ArrayList<int[]> posiblesRes=new  ArrayList<>();
+    ArrayList<Coordinate> posiciones=new  ArrayList<>();
     public ArrayList<Coordinate> posiciones=new  ArrayList<>();
 
     public Figure(int operacion, int total, int cuadritos, int id, String nombre) {
@@ -67,6 +69,14 @@ public class Figure implements Comparable<Figure>{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public ArrayList<int[]> getPosiblesRes() {
+        return posiblesRes;
+    }
+
+    public void setPosiblesRes(ArrayList<int[]> posiblesRes) {
+        this.posiblesRes = posiblesRes;
     }
 
     public ArrayList<Coordinate> getPosiciones() {

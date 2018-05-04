@@ -219,6 +219,11 @@ public final class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBComplete.setText("Complete");
+        jBComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCompleteActionPerformed(evt);
+            }
+        });
 
         jSave.setText("Save");
         jSave.addActionListener(new java.awt.event.ActionListener() {
@@ -370,6 +375,11 @@ public final class Principal extends javax.swing.JFrame {
             System.err.println("No se pudo abrir");
         }
     }//GEN-LAST:event_jBLoadActionPerformed
+
+    private void jBCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompleteActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jBCompleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBComplete;
