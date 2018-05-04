@@ -968,7 +968,7 @@ public class Structure {
             }
         }
         
-        
+      
         initializeResultado();
         
         for ( i=0;i<this.x;i++){
@@ -989,6 +989,7 @@ public class Structure {
                System.out.print(resultado[i1][j1]+"\t"); 
             }
             System.out.println();
+            System.out.println(figures.get(s).cuadritos+"("+figures.get(s).posiciones.get(0).x+","+figures.get(s).posiciones.get(0).y+")"); 
         }
     }
     

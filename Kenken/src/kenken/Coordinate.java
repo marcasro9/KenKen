@@ -10,8 +10,8 @@ package kenken;
  * @author Armando
  */
 public class Coordinate {
-    int x=0;
-    int y=0;
+    public int x=0;
+    public int y=0;
     
     public void Coordinate(){
         x=0;
