@@ -74,7 +74,7 @@ public class Menu extends javax.swing.JFrame {
         if(!rows.equals("") && !columns.equals("")){
             int x=Integer.parseInt(rows);
             int y=Integer.parseInt(columns);
-            if(x<=19 && y<=19){
+            if(x<=18 && y<=18){
                 if(x==y){
                     Principal principal=new Principal(x,y);
                     principal.setLocationRelativeTo(null);
@@ -84,7 +84,7 @@ public class Menu extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "El kenken tiene que ser cuadrado (Ejemplo;5x5):");
                 }
             }else{
-                JOptionPane.showMessageDialog(this, "Los valores no pueden ser mayores a 10:");
+                JOptionPane.showMessageDialog(this, "Los valores no pueden ser mayores a 18:");
             }
         }else{
             JOptionPane.showMessageDialog(this, "Ingrese los valores:");

@@ -5,12 +5,83 @@
  */
 package kenken;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author Armando
  */
-public class Figure {
+public class Figure implements Comparable<Figure>{
     
+    public int operacion;
+    public int total;
+    public Integer cuadritos;
+    public int id;
+    public String nombre;
+    ArrayList<Coordinate> posiciones=new  ArrayList<>();
+
+    public Figure(int operacion, int total, int cuadritos, int id, String nombre) {
+        this.operacion = operacion;
+        this.total = total;
+        this.cuadritos = cuadritos;
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public int getOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(int operacion) {
+        this.operacion = operacion;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getCuadritos() {
+        return cuadritos;
+    }
+
+    public void setCuadritos(int cuadritos) {
+        this.cuadritos = cuadritos;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ArrayList<Coordinate> getPosiciones() {
+        return posiciones;
+    }
+
+    public void setPosiciones(ArrayList<Coordinate> posiciones) {
+        this.posiciones = posiciones;
+    }
+    
+    @Override
+    public int compareTo(Figure t) {
+        return cuadritos.compareTo(t.getCuadritos());
+    }
+  
     public Coordinate[] elePos1(){
         
         Coordinate[] coordinate= new Coordinate[4];
@@ -315,5 +386,5 @@ public class Figure {
         coordinate[3].y=1;
         
         return coordinate;
-    }
+    } 
 }
